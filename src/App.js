@@ -28,8 +28,8 @@ const MovieCard = (props) => (
            <img className = "Poster"
             sizes="(max-width:342px) 200px,
                    (min-width:342px) 20em" 
-            srcSet={`http://image.tmdb.org/t/p/w342${props.poster} 280w, 
-                     http://image.tmdb.org/t/p/w500${props.poster} 500w`}/>
+            srcSet={`https://image.tmdb.org/t/p/w342${props.poster} 280w, 
+                     https://image.tmdb.org/t/p/w500${props.poster} 500w`}/>
 
             <CardContent className = 'Movie-Card-Info'>
               <Title title = {props.title} />
