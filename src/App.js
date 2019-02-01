@@ -29,7 +29,8 @@ const MovieCard = (props) => (
             sizes="(max-width:342px) 200px,
                    (min-width:342px) 20em" 
             srcSet={`https://image.tmdb.org/t/p/w342${props.poster} 280w, 
-                     https://image.tmdb.org/t/p/w500${props.poster} 500w`}/>
+                     https://image.tmdb.org/t/p/w500${props.poster} 500w`}
+            alt={props.title}/>
 
             <CardContent className = 'Movie-Card-Info'>
               <Title title = {props.title} />
@@ -51,8 +52,9 @@ const MovieCard = (props) => (
 class MovieApp extends Component {
   constructor(props){
     super(props);
+    // switched out manual bind for arrow function
     //bind so addRemoveFave knows to refer to Movie App's state when passed into child
-    this.addRemoveFave = this.addRemoveFave.bind(this);
+    // this.addRemoveFave = this.addRemoveFave.bind(this);
     this.state = {
         sortBy:"None",
         favoriteToggle:false,
@@ -77,15 +79,15 @@ class MovieApp extends Component {
 
   }
 
-  addRemoveFave(title){
+  addRemoveFave = (title) => {
       //Make a copy of state's favorited array
       let oldState = [...this.state.favorited];
 
       //find the title
-      const found = oldState.findIndex((x)=>{ return x.title == title });
+      const found = oldState.findIndex((x)=> x.title === title );
 
       //if it's found, remove it from the old state, else add the movie by looking for it's object in the movies array
-      found >= 0 ? oldState.splice(found,1) : oldState.push( this.state.movies.find( (x)=> x.title == title));
+      found >= 0 ? oldState.splice(found,1) : oldState.push( this.state.movies.find( (x) => x.title === title));
       
       //update favorited
       this.setState({favorited:oldState});

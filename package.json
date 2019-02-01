@@ -2,7 +2,7 @@
   "name": "varochallenge",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://tranced.github.io/ReactMovieApp",
+  "homepage": ".",
   "dependencies": {
     "@material-ui/core": "^3.2.0",
     "react": "^16.5.2",
