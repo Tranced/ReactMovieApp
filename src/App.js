@@ -66,17 +66,24 @@ class MovieApp extends Component {
 
   //Call the API during componentWillMount
   componentWillMount(){
-    fetch("https://api.themoviedb.org/3/movie/now_playing?api_key="+key+"&language=en-US")
-    .then(response => {
-      return response.json();
-    })
-    //Create movie's array from response.results
-    .then(data => {
-      this.setState({movies: data.results});
-      return data.results;
-    });
+    this.loadMovies(key);
+  }
 
-
+  loadMovies = async (key) => {
+    // Used to be in componentDidMount
+    // fetch("https://api.themoviedb.org/3/movie/now_playing?api_key="+key+"&language=en-US")
+    // .then(response => {
+    //   return response.json();
+    // })
+    // //Create movie's array from response.results
+    // .then(data => {
+    //   this.setState({movies: data.results});
+    //   return data.results;
+    // });
+    const response = await fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=${key}&language=en-US`);
+    const data = await response.json();
+    const movies = await data.results;
+    this.setState({movies: movies});
   }
 
   addRemoveFave = (title) => {
