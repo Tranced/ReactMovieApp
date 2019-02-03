@@ -1,13 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, useState} from 'react';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
 
 import './App.css';
 
-let key = process.env.REACT_APP_SECRET_KEY;
+const key = process.env.REACT_APP_SECRET_KEY;
 
 //stateless components
 const Title = ({title}) => <h1 className = 'Title'> {title} </h1>;
@@ -21,8 +20,17 @@ const movieCardStyle = {
 
 
 
-//Stateless Movie Card Component
-const MovieCard = (props) => (
+//Movie Card Component with Hook
+const MovieCard = (props) => {
+  
+  const [favorited, setFavorited] = useState(false);
+  
+  const handleClick = (favorited, props) => {
+    setFavorited(!favorited);
+    return props.toggleFave(props.title);
+  }
+  
+  return(
           <Card className = "Movie-Card" style={movieCardStyle}>
 
            <img className = "Poster"
@@ -39,16 +47,14 @@ const MovieCard = (props) => (
               <Overview overview = {props.overview}/>
             </CardContent>
 
-            <CardActionArea>
-              <CardActions>
-                <Button className = "favorite" color = "primary" variant = "contained" onClick={()=>props.toggleFave(props.title)}> favorite/unfavorite </Button>
-              </CardActions>
+            <CardActionArea onClick={() => handleClick(favorited, props)}>
+                <Button className = "favorite" color = {favorited ? "secondary" : "primary"} variant = "contained"> favorite/unfavorite </Button>
             </CardActionArea>
 
           </Card>
-)
+  )
 
-
+}
 class MovieApp extends Component {
   constructor(props){
     super(props);
