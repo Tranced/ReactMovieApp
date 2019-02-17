@@ -18,6 +18,11 @@ const movieCardStyle = {
   display:"flex"
 }
 
+const buttonBarStyle = {
+  position: "-webkit-sticky",
+  position:"sticky",
+  top:0
+}
 
 
 //Movie Card Component with Hook
@@ -133,6 +138,15 @@ class MovieApp extends Component {
 
     return(
         <div className="MovieApp">
+
+        <div className="button-bar" style={buttonBarStyle}>
+          <Button variant = "contained" onClick={()=>this.setState({sortBy:"rating"})}> Rating </Button>
+          <Button variant = "contained" onClick={()=>this.setState({sortBy:"releaseDate"})}> Release Date </Button>
+          <Button variant = "contained" onClick={()=>this.setState({sortBy:"title"})}> Title </Button>
+          <Button variant = "contained" color ={this.state.favoriteToggle ? "secondary" : "primary"} onClick={()=>this.state.favoriteToggle ? this.setState({favoriteToggle:false}) : this.setState({favoriteToggle:true})}> favorited: {this.state.favoriteToggle.toString()} </Button>
+        </div>
+
+
           {
             //generate moviecards from moviestoshow array
             moviesToShow.map(movie => <MovieCard 
@@ -147,10 +161,6 @@ class MovieApp extends Component {
                                       />)
           }
 
-              <Button variant = "contained" onClick={()=>this.setState({sortBy:"rating"})}> Rating </Button>
-              <Button variant = "contained" onClick={()=>this.setState({sortBy:"releaseDate"})}> Release Date </Button>
-              <Button variant = "contained" onClick={()=>this.setState({sortBy:"title"})}> Title </Button>
-              <Button variant = "contained" color ={this.state.favoriteToggle ? "secondary" : "primary"} onClick={()=>this.state.favoriteToggle ? this.setState({favoriteToggle:false}) : this.setState({favoriteToggle:true})}> favorited: {this.state.favoriteToggle.toString()} </Button>
 
         </div>  
 
