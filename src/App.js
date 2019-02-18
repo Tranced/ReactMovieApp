@@ -2,7 +2,7 @@ import React, { Component, useState} from 'react';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
 
 import './App.css';
 
@@ -15,7 +15,7 @@ const VoteAvg = ({voteAvg}) => <div className = 'VoteAvg'> Rating: {voteAvg} </d
 const ReleaseDate = ({releaseDate}) => <div className = 'ReleaseDate'> Date: {releaseDate} </div>;
 
 const movieCardStyle = {
-  display:"flex"
+  display:"flex",
 }
 
 const buttonBarStyle = {
@@ -45,16 +45,16 @@ const MovieCard = (props) => {
                      https://image.tmdb.org/t/p/w500${props.poster} 500w`}
             alt={props.title}/>
 
-            <CardContent className = 'Movie-Card-Info'>
+            <CardContent style={{flexGrow:1}} className = 'Movie-Card-Info'>
               <Title title = {props.title} />
               <VoteAvg voteAvg = {props.voteAvg} />
               <ReleaseDate releaseDate = {props.releaseDate}/>
               <Overview overview = {props.overview}/>
             </CardContent>
 
-            <CardActionArea onClick={() => handleClick(favorited, props)}>
+            <CardActions  onClick={() => handleClick(favorited, props)}>
                 <Button className = "favorite" color = {favorited ? "secondary" : "primary"} variant = "contained"> favorite/unfavorite </Button>
-            </CardActionArea>
+            </CardActions>
 
           </Card>
   )
